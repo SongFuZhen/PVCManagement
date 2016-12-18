@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BlueCarGpsWeb.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="pageSize" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="dbName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">PEAssetManagment</Value>
+    </Setting>
+    <Setting Name="db" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=SFZ-PC\SQLEXPRESS;Initial Catalog=PEAssetManagment;Persist Security Info=True;User ID=sa;Password=1;Connect Timeout=150;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

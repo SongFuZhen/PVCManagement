@@ -1,0 +1,34 @@
+﻿[
+  {
+    "outputFile": "Content/surveillance.css",
+    "inputFile": "Content/surveillance.scss"
+  },
+  {
+    "outputFile": "Content/minitor.css",
+    "inputFile": "Content/minitor.scss"
+  },
+  {
+    "outputFile": "Content/layout.css",
+    "inputFile": "Content/layout.scss"
+  },
+  {
+    "outputFile": "Content/shop.css",
+    "inputFile": "Content/shop.scss"
+  },
+  {
+    "outputFile": "Content/dashboard.css",
+    "inputFile": "Content/dashboard.scss"
+  },
+  {
+    "outputFile": "Content/basic-color.css",
+    "inputFile": "Content/basic-color.scss"
+  },
+  {
+    "outputFile": "Content/A.css",
+    "inputFile": "Content/A.scss"
+  },
+  {
+    "outputFile": "Scripts/jquery-ui-1.9.1.custom.min.es5.js",
+    "inputFile": "Scripts/jquery-ui-1.9.1.custom.min.js"
+  }
+]

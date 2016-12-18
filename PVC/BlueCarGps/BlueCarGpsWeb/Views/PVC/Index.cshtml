@@ -1,0 +1,125 @@
+﻿@using MvcPaging
+@model IPagedList<BlueCarGpsLib.Data.PVC>
+
+<div class="row" style="margin:0;">
+    <form action="/PVC/Search" method="get">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="marco-igroup-zhongdu">
+                <span>收货人姓名</span>
+                <input type="text" name="name" id="name" placeholder="收货人姓名" value="@ViewBag.Query.name" />
+            </div>
+        </div>
+
+        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <div class="marco-igroup-zhongdu">
+                <span>发货日期从</span>
+                <input type="text" name="shipDateFrom" id="shipDateFrom" class="date-picker" placeholder="发货时间从" value="@ViewBag.Query.shipDateFrom" />
+                <span>~</span>    
+                <input type="text" name="shipDateTo" id="shipDateTo" class="date-picker" placeholder="发货时间到" value="@ViewBag.Query.shipDateTo" />
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="marco-igroup-zhongdu">
+                <span>管码号</span>
+                <input type="text" name="peNum" id="peNum" placeholder="管码号" value="@ViewBag.Query.peNum" />
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="marco-igroup-zhongdu">
+                <span>品名</span>
+                <input type="text" name="brand" id="brand" placeholder="品名" value="@ViewBag.Query.brand" />
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-top:2px;">
+            <button type="submit" class="marco-btn-zhongdu" style="width: 150px; padding: 6px;">
+                <i class="glyphicon glyphicon-search"></i>
+                搜索
+            </button>
+
+            <a href="/PVC/Create">
+                <button type="button" class="marco-btn-success pull-right" style="width: 150px; padding: 6px;">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    创建
+                </button>
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="marco-npanel-primary" style="margin: 15px;">
+    <div class="marco-nbody" style="overflow: auto;">
+        <table class="table table-bordered">
+            <tr>
+                <th>收货人姓名</th>
+                <th>发货日期</th>
+                <th>发货数量</th>
+                <th>管码号</th>
+                <th>品名</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.shipDate)*@
+                        @item.shipDate.ToString("yyyy-MM-dd")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.shipAmount)
+                        @Html.DisplayFor(modelItem => item.unit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.peNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.brand)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.createdAt)*@
+                        @item.createdAt.ToString("yyyy-MM-dd")
+                    </td>
+                    <td>
+                        @Html.ActionLink("编辑", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("删除", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+    <div class="clearfix pagination">
+        <div class="pagination-inner">
+            @if (Model != null)
+            {
+                if (ViewBag.Query != null)
+                {
+                    var html = Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+                        .Options(o => o.AddRouteValue("name", ViewBag.Query.name))
+                        .Options(o => o.AddRouteValue("shipDateFrom", ViewBag.Query.shipDateFrom))
+                        .Options(o => o.AddRouteValue("shipDateTo", ViewBag.Query.shipDateTo))
+                        .Options(o => o.AddRouteValue("peNum", ViewBag.Query.peNum))
+                        .Options(o => o.AddRouteValue("brand", ViewBag.Query.brand));
+                    @html
+                }
+                else
+                {
+                    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    Layout.datepicker('.date-picker');
+</script>

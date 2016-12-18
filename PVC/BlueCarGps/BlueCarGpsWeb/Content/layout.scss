@@ -1,0 +1,916 @@
+﻿@import 'basic-color.scss';
+
+body{
+    font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", Heiti, "黑体", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", sans-serif !important;
+}
+
+.active{
+    &>a{
+        background-color: transparent !important;
+        color: $zhongdu-red !important;
+    }
+}
+
+.bg{
+    /*background: url('/images/Banckground.jpg') no-repeat center center #888;*/
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.login{
+    margin-top: 10%;
+    margin-left:22%;
+    text-align:center;
+    min-width: 400px;
+    border-radius:20px;
+    max-width:600px;
+    background:url(/images/Transparent.png);
+    padding:15px;
+
+    .login-heading{
+        margin-top: 20px;
+        /*background:url(/images/zdwz512.png)center no-repeat ;*/
+        height:100px;
+    }
+
+    .login-body{
+        margin-top: 20px;
+        div{
+            margin-top: 10px;
+        }
+    }
+
+    .login-footer{
+        margin-top: 20px;
+        margin-bottom: 40px;
+        button{
+            width: 100px;
+            height: 40px;
+            i{
+                margin-right:10px;
+            }
+        }
+    }
+}
+
+.home{
+    position:relative;
+    margin-top:20%;
+    margin-left: 30%;
+    i{
+        font-size:3em;
+        width: 80px;
+        height: 80px;
+        text-align:center;
+        padding: 15px;
+        color: $high-blue;
+        animation: bell-shake 3s;
+        -webkit-animation: bell-shake 3s; /* Safari and Chrome */
+        -o-animation: bell-shake 3s; /* Opera */
+        animation-iteration-count: infinite;
+    }
+    span{
+        margin-left: 20px;
+        font-size: 2em;
+    }
+}
+
+@-moz-keyframes bell-shake
+{
+    1% {transform:rotate(10deg);}
+    2% {transform:rotate(-10deg);}
+    3% {transform:rotate(-20deg);}
+    4% {transform:rotate(-10deg);}
+    5% {transform:rotate(10deg);}
+    6% {transform:rotate(0deg);}
+
+}
+
+@-webkit-keyframes bell-shake
+{
+    1% {transform:rotate(10deg);}
+    2% {transform:rotate(-10deg);}
+    3% {transform:rotate(-20deg);}
+    4% {transform:rotate(-10deg);}
+    5% {transform:rotate(10deg);}
+    6% {transform:rotate(0deg);}
+
+}
+
+@keyframes bell-shake
+{
+    1% {transform:rotate(10deg);}
+    2% {transform:rotate(-10deg);}
+    3% {transform:rotate(-20deg);}
+    4% {transform:rotate(-10deg);}
+    5% {transform:rotate(10deg);}
+    6% {transform:rotate(0deg);}
+
+}
+
+
+//Button
+@mixin marco-btn($marco-bg: $concrete, $marco-color:#f5f5f5) {
+  min-width: 60px;
+  padding: 4px 9px;
+  margin: 5px 0;
+  background: $marco-bg;
+  color: $marco-color;
+  border: 1px solid $marco-bg;
+  &:hover, &:link {
+    outline: none;
+  }
+  &:active {
+    border: 1px solid $marco-bg;
+    background: $marco-color;
+    color: $marco-bg;
+    outline: none;
+    a{
+    	color: $marco-bg;
+    }
+  }
+  &[disabled] {
+    cursor: not-allowed;
+    background: #999;
+    border-color: #999;
+    color: #fff;
+  }
+  a{
+  	color: $marco-color;
+  	&:hover, &:link, &:active{
+  		text-decoration: none;
+          outline:none;
+  	}
+  }
+}
+
+.macro-bgroup {
+  .active {
+    background: transparent;
+    color: $midnight-blue;
+    font-weight: bold;
+  }
+  button {
+    margin-left: -5px;
+  }
+}
+
+.marco-btn {
+  @include marco-btn;
+}
+
+.marco-btn-gps{
+    @include marco-btn($nav-bg);
+}
+
+
+.marco-btn-default {
+  @include marco-btn($wet-asphalt);
+}
+
+.marco-btn-primary {
+  @include marco-btn($brlize-hole);
+}
+
+.marco-btn-success {
+  @include marco-btn($green-sea);
+}
+
+.marco-btn-warning {
+  @include marco-btn($shallow-yellow, $high-yellow);
+}
+
+.marco-btn-danger {
+  @include marco-btn($pomegranate);
+}
+
+.marco-UnBindWX{
+    font-family:'黑体',serif;
+    margin-top:19%;
+    background:transparent;
+    padding:20px 30px;
+    font-size:3em;
+    border: 2px solid $zhongdu-red;
+    border-radius:10px;
+    &:hover{
+      animation: btnAnimate 1s;
+      -moz-animation: btnAnimate 1s;	/* Firefox */
+      -webkit-animation: btnAnimate 1s;	/* Safari 和 Chrome */
+      -o-animation: btnAnimate 1s;	/* Opera */
+      animation-iteration-count: infinite;
+    }
+
+    &:focus{
+        outline:none;
+    }
+}
+
+@keyframes btnAnimate{
+    0% {background: $pomegranate; border-color: $pomegranate; color:white;}
+    50% {background: $alizarin; border-color:$alizarin; color:white;}
+    100% {background: $zhongdu-red; border-color: $zhongdu-red; color:white;}
+}
+
+//Input
+@mixin marco-input($marco-bg:$peter-river, $marco-color: $clouds){
+    border: 1px solid $marco-bg;
+    color:$marco-color;
+    padding:3px 10px 10px 10px;
+    &[disabled]{
+        border-color: $silver;
+    }
+}
+
+.marco-input-default{
+    @include marco-input($clouds, $midnight-blue);
+}
+
+.marco-input-primary{
+    @include marco-input;
+}
+
+.marco-input-success{
+    @include marco-input($green-sea, $midnight-blue);
+}
+
+.marco-input-warning{
+    @include marco-input($flat-yellow, $midnight-blue);
+}
+
+.marco-input-danger{
+    @include marco-input($pomegranate, $midnight-blue);
+}
+
+//Input Group
+@mixin marco-ninput($marco-bg: $concrete, $marco-color: #f2f2f2 ) {
+  border: 1px solid $marco-bg;
+  display: table;
+  margin: 5px 0;
+  height: 40px;
+  span, label {
+    width: 1%;
+    min-width: 60px;
+    padding: 4px 10px;
+    display: table-cell;
+    background: $marco-bg;
+    color: $marco-color;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    i{
+        cursor:pointer;
+    }
+
+    &[disabled]{
+        background: $light-grey;
+    }
+  }
+
+  input, select {
+    border: none;
+    margin: 0;
+    padding: 7px;
+    height: 38px;
+    width: 100%;
+    line-height: 10px;
+    background: $marco-color;
+    color: $body-bg;
+    &:focus{
+        outline:none;
+    }
+    &[disabled] {
+      cursor: not-allowed;
+    }
+
+     &[readonly] {
+      cursor: not-allowed;
+      background: $clouds;
+      color: $peter-river;
+    }
+  }
+}
+
+.marco-igroup {
+  @include marco-ninput;
+}
+
+.marco-igroup-normal{
+    @include marco-ninput($silver, $midnight-blue);
+}
+
+.marco-igroup-default {
+  @include marco-ninput($nav-bg, $font-color);
+}
+
+.marco-igroup-primary {
+  @include marco-ninput($peter-river);
+}
+
+.marco-igroup-success {
+  @include marco-ninput($green-sea);
+}
+
+.marco-igroup-warning {
+  @include marco-ninput($shallow-yellow, $high-yellow);
+}
+
+.marco-igroup-danger {
+  @include marco-ninput($pomegranate);
+}
+
+
+//Panel
+@mixin marco-panel-head($marco-bg: $concrete, $marco-color: #f2f2f2) {
+  height: 40px;
+  line-height: 30px;
+  padding: 5px;
+  font-size: 1.3em;
+  border-bottom:1px solid $zhongdu-red;
+  i{
+      cursor:pointer;
+      &:hover{
+          color:$marco-color;
+      }
+  }
+}
+
+@mixin marco-npanel($marco-border: $silver, $marco-bg: $concrete, $marco-color: #f2f2f2) {
+  margin-top: 10px;
+  border: 2px solid $marco-border;
+  .marco-nheading {
+    @include marco-panel-head($marco-bg, $marco-color);
+  }
+
+  .marco-nbody {
+    padding: 5px;
+    min-height: 40px;
+  }
+}
+
+.marco-npanel {
+  @include marco-npanel;
+}
+
+.marco-npanel-normal{
+  @include marco-npanel($peter-river, $clouds, $wet-asphalt);
+}
+
+.marco-npanel-default {
+  @include marco-npanel($midnight-blue, $wet-asphalt);
+}
+
+.marco-npanel-gps {
+  @include marco-npanel($zhongdu-red, $clouds);
+}
+
+.marco-npanel-primary {
+  @include marco-npanel($brlize-hole, $peter-river);
+}
+
+.marco-npanel-success {
+  @include marco-npanel($green-sea, $turquoise);
+}
+
+.marco-npanel-warning {
+  @include marco-npanel($shallow-yellow, $light-yellow, $high-yellow);
+}
+
+.marco-npanel-danger {
+  @include marco-npanel($pomegranate, $alizarin);
+}
+
+/*Table*/
+.table {
+  background: white;
+  text-align: center;
+  margin-bottom: 0;
+  margin-top:-2px;
+  th {
+    white-space:nowrap;
+    text-align: center;
+    border-bottom: 1px solid $light-grey !important;
+  }
+  td{
+    white-space:nowrap;
+    vertical-align:middle;
+  }
+}
+
+@mixin table-heading {
+  padding: 10px;
+  border-bottom:1px solid $zhongdu-red;
+  font-size: 1.3em;
+  i {
+    margin-right: 10px;
+  }
+}
+
+.table-heading {
+  @include table-heading;
+}
+
+.usual-table {
+  padding: 0;
+  margin-top: 10px;
+  border: 2px solid $zhongdu-red;
+  .table-heading {
+    @include table-heading;
+    margin: 0;
+    background: white;
+  }
+  .table-body{
+      overflow:auto;
+  }
+}
+
+//label and textarea
+.marco-textarea{
+    margin-top:10px;
+    label, span{
+        height:30px;
+        line-height:30px;
+        border: 1px solid $brlize-hole;
+        padding: 10px;
+        border-bottom-color: $brlize-hole;
+        background:$peter-river;
+        color:$clouds;
+    }
+
+    textarea{
+        margin-top:-1px;
+        padding: 10px;
+        resize: none;
+        width:100%;
+        border: 2px solid $peter-river;
+        &[disabled] {
+            cursor: not-allowed;
+            background:$clouds;
+        }
+    }
+}
+
+.current-position{
+    margin-bottom:-10px;
+    color: $asbestos;
+    font-size: .9em;
+    background: transparent;
+}
+
+
+@mixin hr($marco-border-color: $peter-river){
+    border-style: dashed;
+    border-color: $marco-border-color;
+}
+
+
+.hr-grey{
+    @include hr(#999);
+}
+
+.hr-default{
+    @include hr($wet-asphalt);
+}
+
+.hr-primary{
+    @include hr($brlize-hole);
+}
+
+.hr-success{
+    @include hr($green-sea);
+}
+
+.hr-warning{
+    @include hr($orange);
+}
+
+.hr-danger{
+    @include hr($alizarin);
+}
+
+@mixin optionIcon($marco-bg:$peter-river, $marco-color:$clouds){
+    cursor:pointer;
+    &:hover{
+        text-decoration:none;
+    }
+    i{
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        border: 2px solid $marco-bg;
+        line-height:20px;
+        vertical-align:middle;
+        color:$marco-bg;
+        &:hover{
+            background:$marco-bg;
+            color:$marco-color;
+        }
+        &[disabled]{
+            border-color:$silver;
+            background:$silver;
+        }
+    }
+}
+
+.option-icon-primary{
+    @include optionIcon;
+}
+
+.option-icon-success{
+    @include optionIcon($marco-bg:$emerald);
+}
+
+.option-icon-warning{
+    @include optionIcon($marco-bg:$flat-yellow);
+}
+
+.option-icon-danger{
+    @include optionIcon($marco-bg:$pomegranate);
+}
+
+
+@mixin blockquote($marco-bg:$clouds, $marco-color: $peter-river){
+    border-color: $marco-color;
+    color: $marco-color;
+    background:$marco-bg;
+    font-weight:bold;
+}
+
+.marco-blockquote-default{
+    @include blockquote($clouds, $midnight-blue);
+}
+
+.marco-blockquote-primary{
+    @include blockquote($clouds, $peter-river);
+}
+
+.marco-blockquote-info{
+    @include blockquote($clouds, $light-blue);
+}
+
+.marco-blockquote-success{
+    @include blockquote($clouds, $green-sea);
+}
+
+.marco-blockquote-warning{
+    @include blockquote($clouds, $carrot);
+}
+
+.marco-blockquote-danger{
+    @include blockquote($clouds, $pomegranate);
+}
+
+@mixin label($marco-bg: $peter-river, $marco-color: $clouds){
+    background: $marco-bg !important;
+    color: $marco-color!important;
+    padding:3px 5px;
+    font-size: .9em;
+    vertical-align:middle;
+}
+
+.marco-label-default{
+    @include label($clouds, $midnight-blue);
+}
+
+.marco-label-primary{
+    @include label($brlize-hole, $clouds);
+}
+
+.marco-label-success{
+    @include label($green-sea, $clouds);
+}
+
+.marco-label-warning{
+    @include label($orange, $clouds);
+}
+
+.marco-label-danger{
+    @include label($alizarin, $clouds);
+}
+
+@mixin card-box($marco-bg: $peter-river, $marco-color:$clouds){
+    .card-box{
+        border: 2px solid $marco-bg;
+        padding: 3px 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background: $marco-bg;
+        color:$marco-color;
+        .card-heading{
+            height:36px;
+            line-height: 36px;
+            span{
+                font-size:.9em;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                position:absolute;
+                max-width: 220px;
+            }
+            i{
+                cursor:pointer;
+                margin-top:10px;
+            }
+        }
+
+        .card-body{
+            font-size:1.5em;
+            text-align:center;
+            height: 60px;
+            line-height:60px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
+
+        .card-body-multiple{
+            p{
+                height:30px;
+                &:first-child{
+                    margin-top:30px;
+                }
+            }
+        }
+
+        .card-footer{
+            height:36px;
+            line-height: 36px;
+            span{
+                font-size:.9em;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                position:absolute;
+                max-width: 220px;
+            }
+            i{
+                cursor:help;
+                margin-top:10px;
+            }
+        }
+    }
+}
+
+.card-box-default{
+    @include card-box($clouds, $midnight-blue);
+}
+
+.card-box-primary{
+    @include card-box;
+}
+
+.card-box-success{
+    @include card-box($green-sea, $clouds);
+}
+
+.card-box-warning{
+    @include card-box($flat-yellow, $clouds);
+}
+
+.card-box-danger{
+    @include card-box($alizarin, $clouds);
+}
+
+@mixin marco-tabs($marco-bg: $nav-bg, $marco-font: #777777, $marco-active-bg: $font-color, $marco-active-font: $nav-bg){
+    ul{
+        border-color:$zhongdu-red;
+        li{
+            margin-left:-3px;
+            a{
+                border-radius:0;
+                padding: 5px;
+                color: $marco-font;
+                background-color: $marco-bg;
+                text-align:center;
+                &:hover, &:link, &:active{
+                    cursor:pointer;
+                    background: transparent;
+                    border-color:$silver;
+                    border-bottom:$zhongdu-red;
+                }
+            }
+            .badge{
+                border-radius:0;
+                background: transparent;
+                color:$marco-font;
+            }
+
+            &:first-child{
+                margin-left:0;
+                a{
+                    border-top-left-radius:5px;
+                }
+            }
+
+            &:last-child{
+                a{
+                    border-top-right-radius:5px;
+                }
+            }
+        }
+        .active{
+                a{
+                    padding: 5px;
+                    border:none;
+                    background-color: $marco-active-bg;
+                    &:hover, &:link, &:active{
+                        border:none;
+                        border-top: 1px solid $silver;
+                        cursor:default;
+                        background: $marco-active-bg;
+                        color:$marco-active-font;
+                         &:first-child{
+                             border-left:1px solid $silver;
+                        }
+                    }
+                }
+                .badge{
+                    padding:5px 8px;
+                    border-radius:0;
+                    background: transparent;
+                }
+        }
+    }
+
+    .tab-content{
+        border: 1px solid $marco-active-bg;
+        border-top:none;
+        border-right:none;
+        padding: 5px;
+        font-size: 12px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius:5px;
+        ul{
+            list-style:none;
+            padding-left:0;
+            overflow:auto;
+            li{
+                padding: 5px 8px;
+                height: 50px !important;
+                line-height:20px !important;
+                border-bottom:1px dashed $light-grey;
+                cursor:pointer;
+
+                &:first-child{
+                    margin-top:0;
+                }
+
+                &:last-child{
+                    border:none
+                }
+            }
+        }
+    }
+}
+
+.marco-tabs-default{
+    @include marco-tabs;
+}
+
+.marco-tabs-dark{
+    @include marco-tabs($marco-active-bg: $nav-bg, $marco-active-font: $font-color);
+}
+
+.marco-tabs-normal{
+    @include marco-tabs($marco-active-bg: $zhongdu-red, $marco-active-font: $clouds);
+}
+
+@mixin popMsg($marco-bg: $peter-river, $marco-color: white){
+    position:fixed;
+    top: 52px;
+    right: 10px;
+    width: 200px;
+    padding: 4px;
+    text-align:center;
+    background: $marco-bg;
+    color:$marco-color;
+    z-index: 20000;
+    .popMsg-body{
+        height: 40px;
+        padding: 5px;
+        line-height: 30px;
+        font-size:12px;
+        overflow:hidden;
+        text-overflow:clip;
+        white-space:normal;
+    }
+}
+
+.popMsg-default{
+    @include popMsg($silver, $midnight-blue);
+}
+
+.popMsg-primary{
+   @include popMsg;
+}
+
+.popMsg-success{
+    @include popMsg($turquoise);
+}
+
+.popMsg-warning{
+    @include popMsg($orange);
+}
+
+.popMsg-danger{
+    @include popMsg($alizarin);
+}
+
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+
+
+//Btn
+.marco-btn-zhongdu {
+    @include marco-btn($midnight-blue);
+}
+
+//Input
+.marco-igroup-zhongdu{
+    @include marco-ninput($midnight-blue, $clouds);
+}
+
+#loading{
+  background-color: rgba(249, 249, 249, 0.5);
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 90;
+  text-align:center;
+  /*.gif{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    width: 814px;
+    height:400px;
+    text-align:center;
+    top: 50%;
+    left:50%;
+    margin-left: -407px;
+    margin-top: -200px;
+    background-image: url(../images/loading.gif);
+    background-repeat: no-repeat;
+    z-index:99;
+  }*/
+  .spinner {
+      position:absolute;
+      top: 50%;
+      left:50%;
+      width: 50px;
+      height: 60px;
+      margin-left: -25px;
+      margin-top: -30px;
+      text-align: center;
+      div{
+          background-color: $zhongdu-red;
+          height: 100%;
+          width: 6px;
+          display: inline-block;
+   
+          -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+          animation: stretchdelay 1.2s infinite ease-in-out;
+      }
+      .rect2{
+          -webkit-animation-delay: -1.1s;
+          animation-delay: -1.1s;
+      }
+      .rect3{
+          -webkit-animation-delay: -1.0s;
+          animation-delay: -1.0s;
+      }
+      .rect4{
+          -webkit-animation-delay: -0.9s;
+          animation-delay: -0.9s;
+      }
+      .rect5{
+          -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s;
+      }
+     }
+ 
+    @-webkit-keyframes stretchdelay {
+      0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+      20% { -webkit-transform: scaleY(1.0) }
+    }
+ 
+    @keyframes stretchdelay {
+      0%, 40%, 100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+      }  20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+      }
+    }
+}

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PEAssetManagment" Class="BlurCarGpsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SFZ-PC\SQLEXPRESS;Initial Catalog=PEAssetManagment;Persist Security Info=True;User ID=sa" SettingsObjectName="BlueCarGpsLib.Properties.Settings" SettingsPropertyName="PEAssetManagmentConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[User]" Member="User">
+    <Type Name="User">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="pwd" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="pwdSalt" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="phone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="isLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="roleType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PVC" Member="PVC">
+    <Type Name="PVC">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="shipDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="shipAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="unit" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="peNum" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="batchNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="startTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="endTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="brand" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="createdAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="userId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GetGPSDistance" Method="GetGPSDistance" IsComposable="true">
+    <Parameter Name="LatBegin" Parameter="latBegin" Type="System.Single" DbType="Real" />
+    <Parameter Name="LngBegin" Parameter="lngBegin" Type="System.Single" DbType="Real" />
+    <Parameter Name="LatEnd" Parameter="latEnd" Type="System.Single" DbType="Real" />
+    <Parameter Name="LngEnd" Parameter="lngEnd" Type="System.Single" DbType="Real" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.GetNearbyShops" Method="GetNearbyShops">
+    <Parameter Name="lng" Type="System.Double" DbType="Float" />
+    <Parameter Name="lat" Type="System.Double" DbType="Float" />
+    <Parameter Name="maxDistance" Type="System.Double" DbType="Float" />
+    <ElementType Name="GetNearbyShopsResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="fullName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="longitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="latitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="distance" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

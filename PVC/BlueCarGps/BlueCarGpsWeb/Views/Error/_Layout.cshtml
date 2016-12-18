@@ -1,0 +1,172 @@
+﻿@using BlueCarGpsWeb.Helper;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*360默认是极速模式*@
+    <meta name="renderer" content="webkit">
+    @*IE默认设置为最高版本*@
+    <meta name="renderer" content="ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <link href="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css" rel="stylesheet" type="text/css" />
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=eOEgc79oH0F8Nd9Ee5dGS502Kt2xWG0B"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.js"></script>
+    <script type="text/javascript" src="http://developer.baidu.com/map/custom/stylelist.js"></script>
+    @Scripts.Render("~/bundles/baiduMap")
+    @*<script type="text/javascript" src="http://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>*@
+</head>
+<body>
+    <div class="navbar navbar-default" style="background-image:url('/images/head.png'); border-radius:0; border:0;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a href="/Home/Index">
+                <img src="~/images/icon250.png" alt="中都物流" style="margin-left:5px;" />
+            </a>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" style="margin-left:50px;font-family:'黑体','微软雅黑','宋体'; font-size:18px;">
+
+                @*<li>@Html.ActionLink("统计", "Index", "Statistic")</li>*@
+                @if (ViewPermitHelper.Permit("show_dashboard"))
+                {
+                <li class="nav-dashboard">@Html.ActionLink("仪表盘", "Index", "Dashboard")</li>
+                }
+                <li class="nav-users">@Html.ActionLink("用户", "Index", "User")</li>
+                <li class="nav-monitor">@Html.ActionLink("监控", "Index", "Home")</li>
+                <li class="nav-device">@Html.ActionLink("设备", "Index", "Device")</li>
+                <li class="nav-shop">@Html.ActionLink("4S店", "Index", "Shop")</li>
+                <li class="nav-bank">@Html.ActionLink("银行", "Index", "Bank")</li>
+
+                <li role="presentation" class="dropdown nav-basic">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        基础信息 <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" style="font-size: 16px;">
+                        <li class="nav-car">@Html.ActionLink("车辆", "Index", "Car")</li>
+                        <li class="nav-carType">@Html.ActionLink("车辆类型", "Index", "CarType")</li>
+                        <li class="nav-carBrand">@Html.ActionLink("车辆品牌", "Index", "Brand")</li>
+                    </ul>
+                </li>
+            </ul>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/User/BindWX" title="绑定微信">
+                            <i class="fa fa-weixin" style="font-size:14px;"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-deviceMessage">
+                        <a href="/DeviceMessage" title="消息通知">
+                            <i class="fa fa-bell-o" style="font-size:14px;"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/DeviceMessage" style="margin-top:-12px; margin-left:-35px;">
+                            <span class="label label-danger" id="unread-count" style="border-radius:50px;"></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()">
+                            <span style="font-family:'黑体','微软雅黑','宋体'; font-size: 14px;">注销</span>
+                        </a>
+                        @*<a href="/Account/Login"><span style="font-family:'黑体','微软雅黑','宋体'; font-size: 14px;">注销</span></a>*@
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+    <div class="body-content">
+        @RenderBody()
+    </div>
+
+    <div style="position:fixed; bottom: 10px; right:10px;">
+        <audio controls="controls" id="alarm_audio" loop hidden>
+            <source src="~/audio/alarm.mp3" type="audio/mpeg">
+        </audio>
+    </div> 
+
+    @* 加载动画  *@
+    <div id="loading">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        Layout.init();
+
+        var WhereFrom = $('#from_where').val();
+
+        if (WhereFrom == 'wx') {
+            //不请求警报
+        }
+        else {
+            GetUnReadMsg();
+
+            //每10s 获取一次信息
+            var AlarmInterval=  setInterval(function () {
+                GetUnReadMsg();
+            }, 10000);
+
+            function GetUnReadMsg() {
+                var PathName = window.location.pathname.split('/')[1];
+                if (PathName == "Account") {
+                    $('.navbar').css({ display: 'none' });
+                } else {
+                    $.ajax({
+                        url: '/api/Messages/UnreadAlarmMsgCount',
+                        type: 'get',
+                        success: function (data) {
+                            try {
+                                if (data > 0) {
+                                    $('#unread-count').html(data);
+                                    document.getElementById('alarm_audio').play();
+                                    $('#alarm_audio').removeAttr('hidden');
+                                } else {
+                                    document.getElementById('alarm_audio').pause();
+                                    $('#alarm_audio').attr('hidden', 'hidden');
+                                    $('#unread-count').html("");
+                                }
+                            } catch (e) {
+                                //console.log(e);
+                            }
+                        },
+                        error: function () {
+                            //console.log("Something Error!");
+                            Layout.popMsg('popMsg-danger', "请求报警消息API失败");
+                        }
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+﻿@model BlueCarGpsLib.Data.PVC
+
+<div id="pvc" style="margin:20px;">
+    <ol class="breadcrumb current-position">
+        您的位置：
+        <li>@Html.ActionLink("PVC", "Index")</li>
+        <li>{{action}}</li>
+    </ol>
+
+    <hr class="hr-grey" />
+
+    <input type="hidden" id="error_info" value="@ViewBag.msg" />
+
+    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "Post", OnSuccess = "post_return_action(data)"/*, OnBegin = "return validate_page_info()"*/ }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        if (Model != null)
+        {
+            @Html.HiddenFor(model => model.id)
+        }
+
+        <div class="marco-npanel-primary">
+            <div class="marco-nheading">
+                {{action}}
+                <div class="pull-right">
+                    <button type="submit" class="marco-btn-primary" style="margin-top:-10px; padding: 0 10px;background:#c0392b">
+                        <i class="fa fa-check-circle-o"></i>
+                        <span>{{actionBtn}}</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="marco-nbody row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="marco-igroup-primary">
+                        <label for="name">收货人姓名</label>
+                        @if (Model != null)
+                        {
+                            @Html.EditorFor(model => model.name)
+                        }
+                        else
+                        {
+                            <input type="text" name="name" placeholder="收货人姓名" />
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="marco-igroup-primary">
+                        <label for="shipDate">发货日期</label>
+                        @if (Model != null)
+                        {
+                            @*@Html.EditorFor(model => model.shipDate)*@
+                            <input type="text" name="shipDate" placeholder="发货日期" class="date-picker" value="@Model.shipDate.ToString("yyyy-MM-dd")"/>
+                        }
+                        else
+                        {
+                            <input type="text" name="shipDate" placeholder="发货日期" class="date-picker" />
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="marco-igroup-primary">
+                        <label for="shipAmount">发货数量</label>
+                        @if (Model != null)
+                        {
+                            @Html.EditorFor(model => model.shipAmount)
+                            <span style="background: none; margin: 0; width: 100px; border-left: 1px solid steelblue; padding: 0 0 0 5px;">
+                                @Html.EditorFor(model => model.unit)
+                            </span>
+                        }
+                        else
+                        {
+                            <input type="number" name="shipAmount" placeholder="发货数量" />
+                            <span style="background: none; margin: 0; width: 100px; border-left: 1px solid steelblue; padding: 0 0 0 5px;">
+                                <input type="text" name="unit" placeholder="单位" />
+                            </span>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="marco-igroup-primary">
+                        <label for="batchNo">线别/批号</label>
+                        @if (Model != null)
+                        {
+                            @Html.EditorFor(model => model.batchNo)
+                        }
+                        else
+                        {
+                            <input type="text" name="batchNo" placeholder="线别/批号" />
+                        }
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="marco-igroup-primary">
+                        <label for="startTime">开始时间</label>
+                        @if (Model != null)
+                        {
+                            <input type="hidden" name="startTime" value="@Model.startTime" />
+                            <input type="text" name="startTimeStr" placeholder="开始时间" value="@Model.startTime.Value.ToString("yyyyMMddHHmmss")" />
+                        }
+                        else
+                        {
+                            <input type="text" name="startTimeStr" placeholder="开始时间" value="" />
+                        }
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="marco-igroup-primary">
+                        <label for="endTime">结束时间</label>
+
+                        @if (Model != null)
+                        {
+                            <input type="text" name="endTimeStr" placeholder="结束时间" value="@Model.endTime.Value.ToString("yyyyMMddHHmmss")" />
+                            <input type="hidden" name="endTime" value="@Model.endTime" />
+                        }
+                        else
+                        {
+                            <input type="text" name="endTimeStr" placeholder="结束时间" value="" />
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="marco-igroup-primary">
+                        <label for="brand">品号</label>
+                        @if (Model != null)
+                        {
+                            <input type="text" name="brand" placeholder="品号" value="@Model.brand" />
+                        }
+                        else
+                        {
+                            <input type="text" name="brand" placeholder="品号" value="" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    Layout.init();
+
+    Layout.datepicker('.date-picker');
+    
+    if ($("#error_info").val() != "" && $("#error_info").val() != undefined) {
+        Layout.popMsg("popMsg-danger", $("#error_info").val());
+    }
+</script>

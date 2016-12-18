@@ -1,0 +1,41 @@
+﻿.main-container{
+    .row{
+        margin:0;
+    }
+    .minitor-show{
+        padding: 10px;
+        .content{
+            display:table;
+            width: 100%;
+            .device_show{
+                display:table-cell;
+                width:1%;
+                min-width: 330px;
+                max-width:330px;
+            }
+
+            .right-content{
+                margin-top:5px;
+                display:table-cell;
+                position:absolute;
+            }
+        }
+    }
+}
+
+.refresh-msg, .btn-ceju{
+    position: fixed;
+    top: 130px;
+    right: 10px;
+    font-weight: bold;
+    background: white;
+    color: #ff0000;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.btn-ceju{
+    margin:0;
+    right: 100px;
+}

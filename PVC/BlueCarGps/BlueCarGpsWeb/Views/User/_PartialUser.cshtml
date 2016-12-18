@@ -1,0 +1,76 @@
+﻿@model BlueCarGpsLib.Data.User
+@using BlueCarGpsWeb.Helper;
+
+@{
+    ViewBag.Title = "用户管理-中都物流质押车辆跟踪系统";
+}
+
+<input id="msg" type="hidden" value="@ViewBag.msg" />
+
+<input type="hidden" name="UIAuth" id="UIAuth" value="@ViewPermitHelper.Permit("onlyAdmin")" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    if (Model != null)
+    {
+        @Html.HiddenFor(model => model.id)
+    }
+
+    <div style="padding:10px">
+        <div class="marco-npanel-gps">
+            <div class="marco-nheading">
+                <a href="/User/Index">用户列表</a> / <span class="current_title">新增用户</span>
+                @if (ViewPermitHelper.Permit("update_user")|| ViewPermitHelper.Permit("delete_user"))
+                {
+                    <div class="pull-right">
+                        <button type="submit" class="marco-btn-zhongdu" style="margin-top:-10px; padding: 0 10px;">
+                            <i class="fa fa-check-circle-o"></i>
+                            <span class="submit-btn">新增</span>
+                        </button>
+                    </div>
+                }
+            </div>
+
+            <div class="marco-nbody">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="marco-igroup-zhongdu">
+                            <label for="name">简称 *</label>
+                            @Html.EditorFor(model => model.name)
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="marco-igroup-zhongdu">
+                            <label for="email">邮箱 *</label>
+                            @Html.EditorFor(model => model.email)
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="marco-igroup-zhongdu">
+                            <label for="roleType">角色 *</label>
+                            @Html.DropDownList("roleType", ViewData["roleTypeList"] as IEnumerable<SelectListItem>)
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="marco-igroup-zhongdu">
+                            <label for="password">密码 *</label>
+                            @Html.EditorFor(model => model.pwd, new { htmlAttributes = new { type = "password", autocomplete = "off" } })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="marco-igroup-zhongdu">
+                            <label for="phone">电话</label>
+                            @Html.EditorFor(model => model.phone, new { htmlAttributes = new { autocomplete = "off" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
