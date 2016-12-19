@@ -3,21 +3,21 @@
 
 <div class="row" style="margin:0;">
     <form action="/PVC/Search" method="get">
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="marco-igroup-zhongdu">
                 <span>收货人姓名</span>
                 <input type="text" name="name" id="name" placeholder="收货人姓名" value="@ViewBag.Query.name" />
             </div>
-        </div>
+        </div>*@
 
-        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+        @*<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
             <div class="marco-igroup-zhongdu">
                 <span>发货日期从</span>
                 <input type="text" name="shipDateFrom" id="shipDateFrom" class="date-picker" placeholder="发货时间从" value="@ViewBag.Query.shipDateFrom" />
                 <span>~</span>    
                 <input type="text" name="shipDateTo" id="shipDateTo" class="date-picker" placeholder="发货时间到" value="@ViewBag.Query.shipDateTo" />
             </div>
-        </div>
+        </div>*@
 
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="marco-igroup-zhongdu">
@@ -26,14 +26,14 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="marco-igroup-zhongdu">
                 <span>品名</span>
                 <input type="text" name="brand" id="brand" placeholder="品名" value="@ViewBag.Query.brand" />
             </div>
-        </div>
+        </div>*@
 
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-top:2px;">
+        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12" style="margin-top:2px;">
             <button type="submit" class="marco-btn-zhongdu" style="width: 150px; padding: 6px;">
                 <i class="glyphicon glyphicon-search"></i>
                 搜索
@@ -42,7 +42,7 @@
             <a href="/PVC/Create">
                 <button type="button" class="marco-btn-success pull-right" style="width: 150px; padding: 6px;">
                     <i class="glyphicon glyphicon-plus"></i>
-                    创建
+                    新建
                 </button>
             </a>
         </div>
